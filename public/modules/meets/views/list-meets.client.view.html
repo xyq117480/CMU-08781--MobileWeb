@@ -1,0 +1,20 @@
+<section data-ng-controller="MeetsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Meets</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="meet in meets" data-ng-href="#!/meets/{{meet._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="meet.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="meet.host.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="meet.place.name"></h4>
+            <jp-ng-bs-animated-button ng-click="joinMeet(meet); $event.stopPropagation();" is-submitting="buttons[meet._id].isSubmitting" result="buttons[meet._id].result" options="buttons[meet._id].options">Join meet</jp-ng-bs-animated-button>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!meets.$resolved || meets.length">
+    	No Meets yet, why don't you <a href="/#!/meets/create">create one</a>?
+    </div>
+</section>

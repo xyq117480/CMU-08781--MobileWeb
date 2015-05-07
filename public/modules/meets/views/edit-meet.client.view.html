@@ -1,0 +1,30 @@
+<section data-ng-controller="MeetsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Meet</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="placeName">Place</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="meet.place.name" id="placeName" class="form-control" placeholder="Name" required>
+                    </div>
+
+                    <label class="control-label" for="isPublic">Visiblility</label>
+                    <div class="controls">
+                        <input type="radio" data-ng-model="meet.isPublic" data-ng-value="0"/> Private<br/>
+                        <input type="radio" data-ng-model="meet.isPublic" data-ng-value="1"/> Visible to friends<br/>
+                        <input type="radio" data-ng-model="meet.isPublic" data-ng-value="2"/> Visible to anyone<br/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

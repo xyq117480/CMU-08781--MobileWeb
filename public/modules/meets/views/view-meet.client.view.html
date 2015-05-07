@@ -1,0 +1,67 @@
+<section data-ng-controller="MeetsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="meet.place.name"></h1>
+	</div>
+    <p class="list-group-item">
+        {{ meet.place.description }}
+        <img class="list-group-item place-img" ng-src="{{ meet.place.image_url || '' }}">
+    </p>
+
+    <br /><br />
+
+	<span ng-repeat="invited in meet.invite">
+		<div>
+			<span class="h4">{{invited.displayName}}</span>
+			<span ng-if="minutesToDestination[invited.displayName]" class="h4">: {{minutesToDestination[invited.displayName]}} minutes away</span>
+			<br /><br />
+		</div>
+	</span>
+	<br />
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == meet.host._id))">
+		<a class="btn btn-primary" href="/#!/meets/{{meet._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="meet.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="meet.host.displayName"></span>
+		</em>
+	</small>
+
+	<hr>
+	<div class="row-fluid">
+		<p ng-repeat="invited in meet.invite">
+			
+		</p>
+		<p>
+		
+		</p>
+		<map  center="[{{meet.place.latitude}},{{meet.place.longitude}}]" zoom="13" draggable="true" keyboard-shortcuts="false">
+			
+			<marker position="[{{user.latitude}},{{user.longitude}}]" title="hello marker" visible ="true" icon="/modules/core/img/brand/FaceHappyBlue.png"></marker>
+			
+
+
+			<marker position="[{{meet.place.latitude}},{{meet.place.longitude}}]" title="hello marker" visible ="true" animation="Animation.BOUNCE" icon="http://icons.iconarchive.com/icons/iconsmind/outline/32/Target-Market-icon.png" ></marker>
+
+
+			<div ng-repeat="invited in meet.invite" >
+				<marker  position="[{{invited.latitude}},{{invited.longitude}}]" icon="/modules/core/img/brand/FaceHappyOrange.png"></marker>
+				<shape  id="polyline" name="polyline" geodesic="true" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2" path="[[{{invited.latitude}},{{invited.longitude}}],[{{meet.place.latitude}},{{meet.place.longitude}}]]"></shape>
+			</div>
+
+			
+
+			
+			
+		</map>
+			
+
+	</div>
+</section>

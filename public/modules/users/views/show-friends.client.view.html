@@ -1,0 +1,30 @@
+<section data-ng-controller="UsersController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Friends</h1>
+    </div>
+    <div class="list-group">
+        <div data-ng-repeat="friend in friends" class="list-group-item">
+			<small class="list-group-item-text">
+				Member from
+				<span data-ng-bind="friend.created | date:'medium'"></span>
+
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="friend.displayName"></h4>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Users</h1>
+    </div>
+    <div class="list-group">
+        <div data-ng-repeat="user in users" class="list-group-item">
+            <small class="list-group-item-text">
+                Member from
+                <span data-ng-bind="user.created | date:'medium'"></span>
+
+            </small>
+            <h4 class="list-group-item-heading" data-ng-bind="user.displayName"></h4>
+            <button ng-click="addFriend(user)">Add friend</button>
+        </div>
+    </div>
+</section>

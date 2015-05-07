@@ -1,0 +1,50 @@
+<section data-ng-controller="MeetsController" data-ng-init="getGeolocation();">
+
+    <div class="page-header">
+        <h1>New Meet</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="placeName">Where are you going?</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="placeName" ng-change="yelpRecommend();" id="placeName" class="form-control" placeholder="Restaurants/cinema/bar/..." required />
+                        <div ng-repeat="choice in yelpRecommendation">
+                            <a ng-href="{{ choice.mobile_url }}"><img ng-src="{{ choice.rating_img_url || '' }}"></a> <a href ng-click="updatePlace(choice);">{{choice.name + ': ' + choice.location.display_address.join()}}</a>
+                        </div>
+
+                    <label class="control-label" for="inviteStr">Invite anyone?</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="inviteStr" id="inviteStr" class="form-control" placeholder="Your friends' name, seperated by comma. eg. Michael Jordan, Brad Pitt, ..." />
+                    </div>
+
+                    <label class="control-label" for="meetTime">
+                    Time</label>
+                    <div class="controls">
+                        <input type="time" data-ng-model="meetTime" id="meetTime" class="form-control" placeholder="Select Time" />
+                    </div>
+
+                    <label class="control-label" for="meetTime">
+                    Date</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="meetDate" id="meetDate" class="form-control" placeholder="Select Date" />
+                    </div>
+
+                    <label class="control-label" for="isPublic">Visiblility</label>
+                    <div class="controls">
+                        <input type="radio" data-ng-model="isPublic" data-ng-value="0"/> Private<br/>
+                        <input type="radio" data-ng-model="isPublic" data-ng-value="1"/> Visible to friends<br/>
+                        <input type="radio" data-ng-model="isPublic" data-ng-value="2"/> Visible to anyone<br/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
